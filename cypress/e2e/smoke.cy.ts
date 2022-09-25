@@ -1,7 +1,5 @@
-it("should play audio", () => {
-  cy.visit("/");
-  cy.get("audio").then((audio) => {
-    audio[0].play();
-    cy.wait(5000);
+describe("My First Test", () => {
+  it("Does not do much!", () => {
+    expect(true).to.equal(true);
   });
 });
