@@ -45,6 +45,6 @@ model Track {
   lyrics  String?
   about   String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
