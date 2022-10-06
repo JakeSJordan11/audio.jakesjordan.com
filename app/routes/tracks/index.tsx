@@ -13,19 +13,17 @@ export const loader = async () => {
 export default function Index() {
   const { tracks } = useLoaderData() as LoaderData;
   return (
-    <main className="h-full dark:bg-neutral-800">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {tracks.map((track) => (
-          <AudioCard
-            key={track.id}
-            url={track.url}
-            title={track.title}
-            artwork={track.artwork}
-          >
-            <Link to={track.id}>Info</Link>
-          </AudioCard>
-        ))}
-      </div>
+    <main className="grid grid-cols-1 gap-4 dark:bg-neutral-800 md:grid-cols-2 lg:grid-cols-3">
+      {tracks.map((track) => (
+        <AudioCard
+          key={track.id}
+          url={track.url}
+          title={track.title}
+          artwork={track.artwork}
+        >
+          <Link to={track.id}>Info</Link>
+        </AudioCard>
+      ))}
     </main>
   );
 }
