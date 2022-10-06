@@ -1,7 +1,7 @@
 import { prisma } from "~/db.server";
 
 export async function getTracks() {
-  return prisma.track.findMany({ take: 10 });
+  return prisma.track.findMany();
 }
 
 export async function getTrack(id: string) {
