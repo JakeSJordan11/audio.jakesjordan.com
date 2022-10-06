@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   return json({ track });
 };
 
-export default function PostSlug() {
+export default function TrackInfo() {
   const { track } = useLoaderData();
   return (
     <main className="mx-auto max-w-4xl">

@@ -1,7 +1,5 @@
 import { Link } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
-import AudioseumIcon from "~/components/icons/audioseum";
-import AccountIcon from "~/components/icons/account";
 import { useCallback, useRef, useState } from "react";
 import { json } from "@remix-run/node";
 
@@ -13,57 +11,22 @@ export const loader = async () => {
 };
 
 export default function Index() {
-  return (
-    <>
-      <Header />
-      <AudioCardGrid />
-    </>
-  );
-}
-
-export function Header() {
-  return (
-    <header className="fixed top-0 z-10 w-full bg-white">
-      <div className="flex place-content-between items-center">
-        <AudioseumIcon width={48} className="m-1" />
-        <h1 className="font-mono text-2xl font-extrabold text-neutral-800">
-          Audioseum
-        </h1>
-        <Link
-          to="/join"
-          className="bg-pink-50  px-3 py-0.5 text-sm font-bold text-slate-800"
-        >
-          Sign up
-        </Link>
-        <Link
-          to="/login"
-          className="bg-blue-50 px-3 py-0.5 text-sm font-bold text-slate-800"
-        >
-          Log In
-        </Link>
-        <AccountIcon width={36} />
-      </div>
-    </header>
-  );
-}
-
-export function AudioCardGrid() {
   const { tracks } = useLoaderData() as LoaderData;
   return (
-    <section className="grid grid-cols-1 gap-4 pt-14 md:grid-cols-2 lg:grid-cols-3">
-      {tracks.map((track) => (
-        <>
+    <main className="h-full dark:bg-neutral-800">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {tracks.map((track) => (
           <AudioCard
             key={track.id}
             url={track.url}
             title={track.title}
             artwork={track.artwork}
           >
-            <Link to={track.id}>View</Link>
+            <Link to={track.id}>Info</Link>
           </AudioCard>
-        </>
-      ))}
-    </section>
+        ))}
+      </div>
+    </main>
   );
 }
 
@@ -75,20 +38,22 @@ interface AudioCardProps {
 }
 export function AudioCard({ artwork, title, url, children }: AudioCardProps) {
   return (
-    <article className="flex h-full items-center justify-center rounded-lg border-2 bg-gray-100 p-4 text-center shadow-md">
+    <article className="mx-8 my-4 flex items-center justify-center rounded-lg text-center ring-2 ring-red-600">
       {artwork && (
         <img
           src={`${artwork}`}
           alt="track artwork"
-          className="w-1/4 rounded-lg"
+          className="w-1/6 rounded-2xl py-2"
         />
       )}
       <div className="ml-4 flex flex-col justify-center">
-        <h1 className="rounded-lg px-3 py-1 font-mono font-black text-neutral-800 backdrop-blur-md">
+        <h1 className="rounded-lg px-3 py-1 font-mono font-medium dark:text-neutral-100">
           {title}
         </h1>
         <AudioButton src={url} />
-        {children}
+        <p className="rounded-lg px-3 py-1 font-mono font-medium dark:text-neutral-100">
+          {children}
+        </p>
       </div>
     </article>
   );
@@ -117,8 +82,8 @@ export function AudioButton({ src }: AudioButtonProps) {
       <button
         className={
           isPlaying
-            ? "scale-90 transform rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 py-1 font-mono text-lg font-medium shadow-none shadow-gray-700 ring-2 ring-offset-2 transition-all duration-300"
-            : "transform rounded-lg bg-gradient-to-r from-fuchsia-500 to-violet-500 py-1 font-mono text-lg font-medium shadow-md shadow-gray-700 ring-2 ring-offset-2 transition-all duration-300"
+            ? "scale-90 transform rounded-lg py-1 font-mono text-lg font-medium shadow-none shadow-black ring-2 ring-orange-600 transition-all duration-300 dark:text-neutral-100"
+            : "transform rounded-lg py-1 font-mono text-lg font-medium shadow-md shadow-black ring-2 ring-teal-600 ring-offset-2 ring-offset-red-600 transition-all duration-300 dark:text-neutral-100"
         }
         onClick={onClick}
       >
